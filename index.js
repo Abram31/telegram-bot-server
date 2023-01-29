@@ -1,10 +1,15 @@
 import TelegramApi from "node-telegram-bot-api"
 import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+dotenv.config()
 import { request } from "./scripts/request.js"
 import { JSDOM } from 'jsdom'
 import { parsingAnnounce, parsingNewsBlock } from "./scripts/zerkalo/parsing.js"
 import { commands } from "./scripts/commands.js"
-dotenv.config()
+import Promise from 'bluebird';
+Promise.config({
+    cancellation: true
+});
+
 const TOKEN = process.env.REACT_APP_TOKEN
 const bot = new TelegramApi(TOKEN, { polling: true })
 
